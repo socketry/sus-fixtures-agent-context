@@ -10,17 +10,40 @@ env:
 
 jobs:
   test:
-    name: Agentic Runner
-    runs-on: [self-hosted, agentic]
+    name: ${{matrix.ruby}} on ${{matrix.os}}
+    runs-on: ${{matrix.os}}-latest
+    continue-on-error: ${{matrix.experimental}}
+    
+    strategy:
+      matrix:
+        os:
+          - ubuntu
+        
+        ruby:
+          - "3.2"
+          - "3.3"
+          - "3.4"
+        
+        experimental: [false]
+        
+        include:
+          - os: ubuntu
+            ruby: head
+            experimental: true
     
     steps:
     - uses: actions/checkout@v4
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{matrix.ruby}}
+        bundler-cache: true
     
-    - name: Install dependencies
+    - name: Install ollama
       run: |
-        bundle config set path "$(ruby -e 'puts Gem.user_dir')"
-        bundle install
+        curl -fsSL https://ollama.com/install.sh | sh
+        sudo systemctl status ollama
+        ollama pull llama3.1:latest
     
     - name: Run tests
-      timeout-minutes: 10
+      timeout-minutes: 30
       run: bundle exec bake test

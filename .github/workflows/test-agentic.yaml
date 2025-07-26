@@ -1,0 +1,26 @@
+name: Test
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+env:
+  CONSOLE_OUTPUT: XTerm
+
+jobs:
+  test:
+    name: Agentic Runner
+    runs-on: [self-hosted, agentic]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        bundle config set path "$(ruby -e 'puts Gem.user_dir')"
+        bundle install
+    
+    - name: Run tests
+      timeout-minutes: 10
+      run: bundle exec bake test
