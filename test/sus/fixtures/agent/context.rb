@@ -16,7 +16,7 @@ describe Sus::Fixtures::Agent::Context do
 		
 		it "explains how to write an agent context test" do
 			with_agent_context(context_path) do |session|
-				response = session.call("What is the method to create a new agent context session?")
+				response = session.call("What is the method to create a new agent context session in a test?")
 				expect(response).to be =~ /with_agent_context/
 			end
 		end

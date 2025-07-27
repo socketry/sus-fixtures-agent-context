@@ -13,14 +13,10 @@ module Sus
 		module Agent
 			# @namespace
 			module Context
+				include Sus::Fixtures::Async::SchedulerContext
+				
 				# @constant [String] The default path to the agent context file.
 				AGENT_PATH = "agent.md"
-				
-				# When included, adds the {Sus::Fixtures::Async::SchedulerContext} to the including class.
-				# @parameter base [Class] The class including this module.
-				def self.included(base)
-					base.include(Sus::Fixtures::Async::SchedulerContext)
-				end
 				
 				# @returns [Integer] the default timeout for agent-based tests, in seconds.
 				def timeout
