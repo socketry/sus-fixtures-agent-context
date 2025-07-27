@@ -6,13 +6,17 @@ Provides convenient fixtures for testing whether a given context is sufficient f
 
 ## Usage
 
-Please see the [project documentation](https://socketry.github.io/sus-fixtures-agent-context/) for more details.
+Please see the [project documentation](https://socketry.github.io/sus-fixtures-async/) for more details.
 
-  - [Getting Started](https://socketry.github.io/sus-fixtures-agent-context/guides/getting-started/index) - This guide explains how to use the `sus-fixtures-agent-context` gem to test agent contexts.
+  - [Getting Started](https://socketry.github.io/sus-fixtures-async/guides/getting-started/index) - This guide explains how to use the `sus-fixtures-agent-context` gem to test agent contexts.
+
+  - [GitHub Actions](https://socketry.github.io/sus-fixtures-async/guides/github-actions/index) - This guide explains how to integrate the `sus-fixtures-agent-context` gem with GitHub Actions for testing agent contexts.
 
 ## Releases
 
-There are no documented releases.
+Please see the [project releases](https://socketry.github.io/sus-fixtures-async/releases/index) for all releases.
+
+### v0.1.0
 
 ## Contributing
 
