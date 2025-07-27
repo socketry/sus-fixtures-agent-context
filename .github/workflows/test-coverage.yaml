@@ -6,7 +6,6 @@ permissions:
   contents: read
 
 env:
-  CONSOLE_OUTPUT: XTerm
   COVERAGE: PartialSummary
 
 jobs:
@@ -22,6 +21,12 @@ jobs:
         ruby:
           - "3.4"
     
+    services:
+      ollama:
+        image: ollama/ollama
+        ports:
+          - 11434:11434
+    
     steps:
     - uses: actions/checkout@v4
     - uses: ruby/setup-ruby@v1
@@ -29,14 +34,11 @@ jobs:
         ruby-version: ${{matrix.ruby}}
         bundler-cache: true
     
-    - name: Install ollama
-      run: |
-        curl -fsSL https://ollama.com/install.sh | sh
-        sudo systemctl status ollama
-        ollama pull llama3.1:latest
+    - name: Pull Model
+      run: bundle exec bake async:ollama:pull
     
     - name: Run tests
-      timeout-minutes: 5
+      timeout-minutes: 30
       run: bundle exec bake test
     
     - uses: actions/upload-artifact@v4

@@ -1,2 +1,4 @@
 getting-started:
   order: 0
+github-actions:
+  order: 1

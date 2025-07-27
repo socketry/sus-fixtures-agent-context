@@ -1,4 +1,13 @@
-name: Test
+# GitHub Actions
+
+This guide explains how to integrate the `sus-fixtures-agent-context` gem with GitHub Actions for testing agent contexts.
+
+## Workflow
+
+In order to use this gem in GitHub Actions, you can set up a workflow that includes the Ollama server. Here is an example of how to configure your `.github/workflows/test.yml`:
+
+```yaml
+name: Test Agent Context
 
 on: [push, pull_request]
 
@@ -7,9 +16,15 @@ permissions:
 
 jobs:
   test:
-    name: ${{matrix.ruby}} on ${{matrix.os}}
+    name: Agent Context
     runs-on: ${{matrix.os}}-latest
     continue-on-error: ${{matrix.experimental}}
+    
+    services:
+      ollama:
+        image: ollama/ollama
+        ports:
+          - 11434:11434
     
     strategy:
       matrix:
@@ -17,8 +32,6 @@ jobs:
           - ubuntu
         
         ruby:
-          - "3.2"
-          - "3.3"
           - "3.4"
         
         experimental: [false]
@@ -27,12 +40,6 @@ jobs:
           - os: ubuntu
             ruby: head
             experimental: true
-    
-    services:
-      ollama:
-        image: ollama/ollama
-        ports:
-          - 11434:11434
     
     steps:
     - uses: actions/checkout@v4
@@ -46,4 +53,7 @@ jobs:
     
     - name: Run tests
       timeout-minutes: 30
-      run: bundle exec bake test
+      run: bundle exec sus test/.agent/context
+```
+
+Note that the timeout is set to 30 mintues to allow sufficient time for the Ollama server to start and for the tests to run.
