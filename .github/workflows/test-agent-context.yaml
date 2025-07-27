@@ -43,13 +43,6 @@ jobs:
         ruby-version: ${{matrix.ruby}}
         bundler-cache: true
     
-    - name: Wait for Ollama to be ready
-      run: |
-        for i in {1..30}; do
-          curl -s http://localhost:11434/api/tags && break
-          sleep 2
-        done
-
     - name: Pull Model
       run: |
         curl -X POST http://localhost:11434/api/pull -d '{"name": "llama3.1"}'
