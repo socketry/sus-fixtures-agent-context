@@ -1,14 +1,18 @@
-# Sus::Fixtures::Async
+# Sus::Fixtures::Agent::Context
 
-Provides a convenient fixture for testing async components in a reactor.
+Provides convenient fixtures for testing whether a given context is sufficient for an agent to performn a task.
 
-[![Development Status](https://github.com/suspecting/sus-fixtures-async/workflows/Test/badge.svg)](https://github.com/suspecting/sus-fixtures-async/actions?workflow=Test)
+[![Development Status](https://github.com/socketry/sus-fixtures-agent-context/workflows/Test/badge.svg)](https://github.com/socketry/sus-fixtures-agent-context/actions?workflow=Test)
 
 ## Usage
 
-Please see the [project documentation](https://socketry.github.io/sus-fixtures-async/) for more details.
+Please see the [project documentation](https://socketry.github.io/sus-fixtures-agent-context/) for more details.
 
-  - [Getting Started](https://socketry.github.io/sus-fixtures-async/guides/getting-started/index) - This guide explains how to use the `sus-fixtures-async` gem to test async components in a reactor.
+  - [Getting Started](https://socketry.github.io/sus-fixtures-agent-context/guides/getting-started/index) - This guide explains how to use the `sus-fixtures-agent-context` gem to test agent contexts.
+
+## Releases
+
+There are no documented releases.
 
 ## Contributing
 

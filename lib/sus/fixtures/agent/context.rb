@@ -1,21 +1,39 @@
+# frozen_string_literal: true
+
+# Released under the MIT License.
+# Copyright, 2025, by Samuel Williams.
 
 require_relative "context/session"
 
+# @namespace
 module Sus
+	# @namespace
 	module Fixtures
+		# @namespace
 		module Agent
+			# @namespace
 			module Context
+				# @constant [String] The default path to the agent context file.
 				AGENT_PATH = "agent.md"
 				
+				# When included, adds the {Sus::Fixtures::Async::SchedulerContext} to the including class.
+				# @parameter base [Class] The class including this module.
 				def self.included(base)
 					base.include(Sus::Fixtures::Async::SchedulerContext)
 				end
 				
+				# @returns [Integer] the default timeout for agent-based tests, in seconds.
 				def timeout
 					# 10 minutes - we don't expect tests to actually take this long, but sometimes Ollama has to load models which can take an exceptionally long time depending on the model size and hardware.
 					60*10
 				end
 				
+				# Yields a session with the agent context loaded from the given path or the default {AGENT_PATH}.
+				# Ensures the session is closed after the block.
+				# @parameter context [String, nil] The path to the context file to load.
+				# @parameter options [Hash] Additional options for the session.
+				# @yields {|session| ...} Yields the session with the loaded context.
+				# 	@parameter session [Session] The session with the loaded context.
 				def with_agent_context(context = nil, **options, &block)
 					session = Session.new(**options)
 					
@@ -24,7 +42,7 @@ module Sus
 					elsif File.exist?(AGENT_PATH)
 						session.load_context_path(AGENT_PATH)
 					end
-
+					
 					yield session
 				ensure
 					session&.close
