@@ -2,12 +2,6 @@ require "sus/fixtures/async/scheduler_context"
 require "sus/fixtures/agent/context"
 
 describe Sus::Fixtures::Agent::Context do
-	include Sus::Fixtures::Async::SchedulerContext
-	
-	def timeout
-		nil
-	end
-	
 	include Sus::Fixtures::Agent::Context
 	
 	let(:fixtures_path) {File.expand_path(".fixtures", __dir__)}
