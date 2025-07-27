@@ -26,17 +26,15 @@ module Sus
 				
 				# Yields a session with the agent context loaded from the given path or the default {AGENT_PATH}.
 				# Ensures the session is closed after the block.
-				# @parameter context [String, nil] The path to the context file to load.
+				# @parameter context [String] The path to the context file to load.
 				# @parameter options [Hash] Additional options for the session.
 				# @yields {|session| ...} Yields the session with the loaded context.
 				# 	@parameter session [Session] The session with the loaded context.
-				def with_agent_context(context = nil, **options, &block)
+				def with_agent_context(context, **options, &block)
 					session = Session.new(**options)
 					
 					if context
 						session.load_context_path(context)
-					elsif File.exist?(AGENT_PATH)
-						session.load_context_path(AGENT_PATH)
 					end
 					
 					yield session
