@@ -44,8 +44,7 @@ jobs:
         bundler-cache: true
     
     - name: Pull Model
-      run: |
-        curl -X POST http://localhost:11434/api/pull -d '{"name": "llama3.1"}'
+      run: bundle exec bake async:ollama:pull
     
     - name: Run tests
       timeout-minutes: 30
